@@ -11,7 +11,6 @@ async def help_command(client: Client, message: Message):
         "👫 **General Features:**\n"
         "• `/couple` - Group ထဲက ကံထူးရှင် အတွဲလေးကို ရွေးပေးမှာပါ။\n"
         "• `/happy` - စိတ်ညစ်နေရင် ဟာသနဲ့ အားပေးစာလေးတွေ ပို့ပေးမှာပါ။\n"
-        "• `/tr` [စာသား] - ဘယ်ဘာသာစကားမဆို မြန်မာလို ပြန်ပေးမှာပါ။\n"
         "• `/love` - အချစ်ရေး ကံစမ်းဟောကြားပေးမှာပါ။\n"
         "• `/id` - မိမိရဲ့ Telegram User ID ကို ကြည့်ရန်။\n"
         
@@ -19,6 +18,7 @@ async def help_command(client: Client, message: Message):
         "• **Welcome** - Group ထဲ လူအသစ်ဝင်ရင် Auto ကြိုဆိုပေးမှာပါ။\n"
         "• **Anti-Spam** - Link တွေ၊ Forward တွေ အများကြီးပို့ရင် Auto Mute ပေးမှာပါ။\n"
         "• `/all` - Group Member အားလုံးကို Tag ခေါ်ပေးမှာပါ။\n"        
+        "• Group တွင်လည်း auto reply ပြန်ပေးသည်"
         "━━━━━━━━━━━━━━━━━━━━"
     )
 
