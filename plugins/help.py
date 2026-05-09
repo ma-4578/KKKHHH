@@ -1,43 +1,32 @@
 import os
 from pyrogram import Client, filters
-from pyrogram.types import Message
-
-# 
-try:
-    OWNER_ID = int(os.environ.get("OWNER_ID", 0))
-except:
-    OWNER_ID = 0
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 @Client.on_message(filters.command("help"))
 async def help_command(client: Client, message: Message):
-    user_id = message.from_user.id
-    chat_id = message.chat.id
+    help_text = (
+        "✨ **Bot Help Menu (အသုံးပြုနည်း)** ✨\n"
+        "━━━━━━━━━━━━━━━━━━━━\n"
+        
+        "👫 **General Features:**\n"
+        "• `/couple` - Group ထဲက ကံထူးရှင် အတွဲလေးကို ရွေးပေးမှာပါ။\n"
+        "• `/happy` - စိတ်ညစ်နေရင် ဟာသနဲ့ အားပေးစာလေးတွေ ပို့ပေးမှာပါ။\n"
+        "• `/tr` [စာသား] - ဘယ်ဘာသာစကားမဆို မြန်မာလို ပြန်ပေးမှာပါ။\n"
+        "• `/love` - အချစ်ရေး ကံစမ်းဟောကြားပေးမှာပါ။\n"
+        "• `/id` - မိမိရဲ့ Telegram User ID ကို ကြည့်ရန်။\n"
+        
+        "👮 **Admin & Safety:**\n"
+        "• **Welcome** - Group ထဲ လူအသစ်ဝင်ရင် Auto ကြိုဆိုပေးမှာပါ။\n"
+        "• **Anti-Spam** - Link တွေ၊ Forward တွေ အများကြီးပို့ရင် Auto Mute ပေးမှာပါ။\n"
+        "• `/all` - Group Member အားလုံးကို Tag ခေါ်ပေးမှာပါ။\n"        
+        "━━━━━━━━━━━━━━━━━━━━"
+    )
+
     
-    # --- ၁။ User များအတွက် (လူတိုင်းသုံးလို့ရတာ) ---
-    help_text = "✨ **Bot Help Menu** ✨\n"
-    help_text += "━━━━━━━━━━━━━━━━━━\n"
-    help_text += "👤 **User Commands:**\n"
-    help_text += "• `/info` - အချက်အလက်ကြည့်ရန်\n"
-    help_text += "• `/love` - အချစ်ရေးဟောရန်\n\n"
+    buttons = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Add Me To Your Group ➕", url=f"https://t.me/{client.me.username}?startgroup=true")
+        ]
+    ])
 
-    # --- ၂။ Admin များအတွက် စစ်ဆေးခြင်း ---
-    is_admin = False
-    if message.chat.type in ["group", "supergroup"]:
-        member = await client.get_chat_member(chat_id, user_id)
-        if member.status in ["administrator", "creator"]:
-            is_admin = True
-
-    if is_admin or user_id == OWNER_ID:
-        help_text += "👮 **Admin Commands:**\n"
-        help_text += "• `/all` - အဖွဲ့ဝင်အားလုံးကို Tag ခေါ်ရန်\n"
-        help_text += "• `/welcome on/off` - ကြိုဆိုစာစနစ်\n\n"
-
-    # --- ၃။ Owner အတွက်သာ စစ်ဆေးခြင်း ---
-    if user_id == OWNER_ID:
-        help_text += "👑 **Owner Commands:**\n"
-        help_text += "• `/broadcast` - သတင်းစကားပါးရန်\n"
-        help_text += "• `/del` - အမေးအဖြေမှတ်ထားတာဖျက်ရန်\n\n"
-
-    help_text += "━━━━━━━━━━━━━━━━━━\n"
-
-    await message.reply_text(help_text)
+    await message.reply_text(help_text, reply_markup=buttons)
